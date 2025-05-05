@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>META OFFICIEL</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      color: #212529;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #5f6368;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .header-buttons {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .header-buttons a {
+      background-color: #d4a5a5;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .header-buttons a:hover {
+      background-color: #b87e7e;
+    }
+
+    main {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+      color: #5f6368;
+    }
+
+    .card p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #5f6368;
+      font-weight: bold;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    .calendar {
+      margin-top: 3rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .calendar h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #5f6368;
+      text-align: center;
+    }
+
+    .calendar-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .calendar-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .calendar-table td, .calendar-table th {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    .calendar-table th {
+      background-color: #5f6368;
+      color: white;
+    }
+
+    .calendar-table td.available {
+      background-color: #d4edda;
+    }
+
+    .calendar-table td.booked {
+      background-color: #f8d7da;
+    }
+
+    footer {
+      background: #212529;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .card {
+        flex-direction: row;
+      }
+
+      .card img {
+        width: 50%;
+        height: auto;
+      }
+
+      .card-content {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>META OFFICIEL</h1>
+    <!-- Button to external site -->
+    <div class="header-buttons">
+      <a href="https://meta-gestion.github.io/META-ACTU./" target="_blank">Accéder à META ACTU.</a>
+    </div>
+  </header>
+
+  <main>
+    <p style="text-align:center; margin-bottom: 2rem;">
+      Explorez nos activités, profitez des événements à venir et soyez prêts à participer.
+    </p>
+
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/e6/a7/cf/e6a7cf16609d803f8959a901b05eeb58.jpg" alt="Randonnée nature">
+      <div class="card-content">
+        <h3>Randonnée en pleine nature</h3>
+        <p> La BD-Manga fera 35 pages dont 1410 vignettes de lecture (30 pages) et 5 pages de publicité.</p>
+        <a href="https://example.com/randonnee" target="_blank">Voir les détails →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/800x400.png?text=Atelier+Cuisine" alt="Atelier cuisine">
+      <div class="card-content">
+        <h3>Atelier cuisine locale</h3>
+        <p>Apprenez à préparer des plats traditionnels dans une ambiance conviviale et chaleureuse.</p>
+        <a href="https://example.com/cuisine" target="_blank">Voir les détails →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/800x400.png?text=Séance+Yoga" alt="Séance yoga">
+      <div class="card-content">
+        <h3>Séance de yoga relaxante</h3>
+        <p>Profitez d’un moment de bien-être et de sérénité avec une séance adaptée à tous les niveaux.</p>
+        <a href="https://example.com/yoga" target="_blank">Voir les détails →</a>
+      </div>
+    </div>
+
+    <!-- Calendar Section -->
+    <div class="calendar">
+      <div class="calendar-controls">
+        <button onclick="changeMonth(-1)">← Mois Précédent</button>
+        <h2 id="calendar-month"></h2>
+        <button onclick="changeMonth(1)">Mois Suivant →</button>
+      </div>
+      <table class="calendar-table">
+        <thead>
+          <tr>
+            <th>Lu</th>
+            <th>Ma</th>
+            <th>Me</th>
+            <th>Je</th>
+            <th>Ve</th>
+            <th>Sa</th>
+            <th>Di</th>
+          </tr>
+        </thead>
+        <tbody id="calendar-body"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Activités à Découvrir</p>
+  </footer>
+
+  <script>
+    const events = {
+      "2025-05-05": "Paintball à 16h",
+      "2025-04-26": "Football à 16h"
+    };
+
+    let currentDate = new Date();
+
+    function renderCalendar() {
+      const month = currentDate.getMonth();
+      const year = currentDate.getFullYear();
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const daysInMonth = lastDay.getDate();
+      const firstDayOfWeek = firstDay.getDay();
+
+      document.getElementById("calendar-month").textContent = `${firstDay.toLocaleString('fr', { month: 'long' })} ${year}`;
+
+      let calendarBody = document.getElementById("calendar-body");
+      calendarBody.innerHTML = "";
+
+      let row = document.createElement("tr");
+
+      // Empty cells before the first day of the month
+      for (let i = 0; i < firstDayOfWeek; i++) {
+        let cell = document.createElement("td");
+        row.appendChild(cell);
+      }
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        if (row.children.length === 7) {
+          calendarBody.appendChild(row);
+          row = document.createElement("tr");
+        }
+
+        let cell = document.createElement("td");
+        let date = new Date(year, month, day);
+        let dateString = date.toISOString().split('T')[0];
+
+        cell.textContent = day;
+
+        if (events[dateString]) {
+          cell.classList.add("booked");
+          cell.title = events[dateString];
+        } else {
+          cell.classList.add("available");
+        }
+
+        row.appendChild(cell);
+      }
+
+      if (row.children.length > 0) {
+        calendarBody.appendChild(row);
+      }
+    }
+
+    function changeMonth(direction) {
+      currentDate.setMonth(currentDate.getMonth() + direction);
+      renderCalendar();
+    }
+
+    renderCalendar();
+  </script>
+
+</body>
+</html>
