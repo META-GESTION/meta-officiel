@@ -141,6 +141,13 @@
 
     .calendar-table td.booked {
       background-color: #f8d7da;
+      cursor: pointer;
+    }
+
+    .calendar-table td.today {
+      background-color: white !important;
+      font-weight: bold;
+      color: black;
     }
 
     footer {
@@ -149,6 +156,22 @@
       text-align: center;
       padding: 1rem;
       margin-top: 3rem;
+    }
+
+    /* Popup message */
+    #event-popup {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #5f6368;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-weight: bold;
+      z-index: 9999;
     }
 
     /* Responsive */
@@ -172,7 +195,6 @@
 
   <header>
     <h1>META OFFICIEL</h1>
-    <!-- Button to external site -->
     <div class="header-buttons">
       <a href="https://meta-gestion.github.io/META-ACTU./" target="_blank">Accéder à META ACTU.</a>
     </div>
@@ -188,8 +210,8 @@
       <div class="card-content">
         <h3>LGHEZZAR BD-Manga</h3>
         <p> La BD-Manga fera 35 pages dont 1410 vignettes de lecture (30 pages) et 5 pages de publicité.
-        Sortie possible le 15 Juin 2025.</p>
-        <a href="https://example.com/randonnee" target="_blank">        </a>
+        Sortie possible le 15 Juin 2025.</p>
+        <a href="https://example.com/randonnee" target="_blank"></a>
       </div>
     </div>
 
@@ -198,7 +220,7 @@
       <div class="card-content">
         <h3>LGHEZZAR BD-Manga 2</h3>
         <p>Date de sortie possible le 30 Juillet 2025</p>
-        <a href="https://example.com/cuisine" target="_blank">     </a>
+        <a href="https://example.com/cuisine" target="_blank"></a>
       </div>
     </div>
 
@@ -211,7 +233,6 @@
       </div>
     </div>
 
-    <!-- Calendar Section -->
     <div class="calendar">
       <div class="calendar-controls">
         <button onclick="changeMonth(-1)">← Mois Précédent</button>
@@ -233,12 +254,13 @@
         <tbody id="calendar-body"></tbody>
       </table>
     </div>
-
   </main>
 
   <footer>
     <p>&copy; 2025 - Activités à Découvrir</p>
   </footer>
+
+  <div id="event-popup"></div>
 
   <script>
     const events = {
@@ -255,6 +277,7 @@
       const lastDay = new Date(year, month + 1, 0);
       const daysInMonth = lastDay.getDate();
       const firstDayOfWeek = firstDay.getDay();
+      const today = new Date().toISOString().split('T')[0];
 
       document.getElementById("calendar-month").textContent = `${firstDay.toLocaleString('fr', { month: 'long' })} ${year}`;
 
@@ -263,8 +286,7 @@
 
       let row = document.createElement("tr");
 
-      // Empty cells before the first day of the month
-      for (let i = 0; i < firstDayOfWeek; i++) {
+      for (let i = 0; i < (firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1); i++) {
         let cell = document.createElement("td");
         row.appendChild(cell);
       }
@@ -281,9 +303,16 @@
 
         cell.textContent = day;
 
+        if (dateString === today) {
+          cell.classList.add("today");
+        }
+
         if (events[dateString]) {
           cell.classList.add("booked");
           cell.title = events[dateString];
+          cell.addEventListener("click", () => {
+            showEventMessage(events[dateString]);
+          });
         } else {
           cell.classList.add("available");
         }
@@ -301,8 +330,17 @@
       renderCalendar();
     }
 
+    function showEventMessage(message) {
+      const popup = document.getElementById("event-popup");
+      popup.textContent = message;
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 1500);
+    }
+
     renderCalendar();
   </script>
-
 </body>
 </html>
